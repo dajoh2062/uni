@@ -3,7 +3,7 @@ package oslomet.uni;
 
 // Student.java
 public class Student {
-    private int id;
+    private String studid;
     private String navn;
     private String telefon;
     private String studienavn;
@@ -12,19 +12,20 @@ public class Student {
     public Student() {
     }
 
-    public Student(String navn, String telefon, String studienavn) {
+    public Student(String studid, String navn, String telefon, String studienavn) {
+        this.studid = studid;
         this.navn = navn;
         this.telefon = telefon;
         this.studienavn = studienavn;
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
+    public String getId() {
+        return studid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String studid) {
+        this.studid = studid;
     }
 
     public String getNavn() {
@@ -55,7 +56,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
+                "id=" + studid +
                 ", navn='" + navn + '\'' +
                 ", telefon='" + telefon + '\'' +
                 ", studienavn='" + studienavn + '\'' +

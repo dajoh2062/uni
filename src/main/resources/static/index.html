@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
@@ -9,22 +9,31 @@
 
 </head>
 <body>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
         <h1>Logg inn</h1>
+            <br>
         <div class="form">
             <label for="brukernavn">Brukernavn: </label>
             <input type="text" class="form-control" id="brukernavn">
+            <span id ="feilbruker"></span><br>
+
             <label for="passord">Passord: </label>
             <input type="password" id="passord" class="form-control">
-            <br>
+            <span id="feilpassord"></span>
+            <br><br>
             <button id="Logginn" class="btn btn-primary">Logg inn</button>
+            <br><br>
+
             <p>Har du ikke bruker? Registrer <a href="registrer">her.</a></p>
         </div>
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="index.js "></script>
+<script src="valider.js"></script>
 </body>
 </html>

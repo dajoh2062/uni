@@ -19,5 +19,5 @@ CREATE TABLE Bruker(
 );
 CREATE TABLE Admin(
     id VARCHAR(10) PRIMARY KEY UNIQUE,
-    FOREIGN KEY (Admin) REFERENCES Student(studid)
+    FOREIGN KEY (id) REFERENCES Student(studid)
 );

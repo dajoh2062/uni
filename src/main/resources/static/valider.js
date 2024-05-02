@@ -1,7 +1,7 @@
 
 $("#brukernavn").change(function validerbrukernavn(){
         const brukernavn=$("#brukernavn").val();
-        const regexb = /^s[0-9]{5}$/;
+        const regexb = /^s[0-9]{6}$/;
 
     const ok = regexb.test(brukernavn)
         if(!ok){

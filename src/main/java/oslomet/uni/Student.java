@@ -20,11 +20,11 @@ public class Student {
     }
 
     // Getters and Setters
-    public String getId() {
+    public String getStudid() {
         return studid;
     }
 
-    public void setId(String studid) {
+    public void setStudid(String studid) {
         this.studid = studid;
     }
 

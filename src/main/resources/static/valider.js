@@ -27,3 +27,4 @@ $("#passord").change(function validerpassord(){
         $("#feilpassord").text("");
     }   return true
 });
+

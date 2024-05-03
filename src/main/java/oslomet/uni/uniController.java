@@ -3,6 +3,7 @@ package oslomet.uni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -11,6 +12,15 @@ import java.util.List;
 public class uniController {
     @Autowired
     private uniRepository rep;
+
+    @GetMapping("/fjernFag")
+    public void fjernFag(String id,String studid) {
+        rep.fjernFag(id, studid);
+    }
+    @PostMapping("/leggtilFag")
+    public void leggtilFag(String id,String studid){
+        rep.leggtilFag(id,studid);
+    }
 
     @GetMapping("/hentEnStudent")
     public Student hentEnStudent(String studid) {

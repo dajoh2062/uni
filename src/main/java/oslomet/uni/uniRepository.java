@@ -12,6 +12,15 @@ public class uniRepository {
     @Autowired
     private JdbcTemplate db;
 
+    public void fjernFag(String id, String studid){
+        String sql = "DELETE FROM Fagtakere WHERE id=? and studid =?";
+        db.update(sql, id, studid);
+    }
+    public void leggtilFag(String id, String studid){
+        String sql ="INSERT INTO Fagtakere (studid, id) VALUES (?,?)";
+        db.update(sql,studid,id);
+    }
+
 
     public Student hentEnStudent(String studid){
         Object[] param = new Object[1];

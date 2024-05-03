@@ -3,7 +3,7 @@ $(function () {
     hentValgteFag();
     hentAndreFag();
 });
-
+const studid='s383075';
 function fjernFag(id,studid){
     let Fjernetfag= {id:id, studid:studid};
     $.get("/fjernFag", Fjernetfag, function (){
@@ -18,7 +18,7 @@ function leggtilFag(id, studid){
 }
 
 function hentValgteFag(){
-    const studid='s383075';
+
     $.get('/hentValgtefag?studid='+studid,function (fag) {
         let ut = '<table class="table table-striped">' +
             '<tr>' +
@@ -44,7 +44,7 @@ function hentValgteFag(){
     })
 }
 function hentAndreFag(){
-    const studid='s383075';
+
     $.get('/hentAndrefag?studid='+studid,function (fag) {
         let ut = '<table class="table table-striped">' +
             '<tr>' +
@@ -73,7 +73,7 @@ function hentAndreFag(){
 
 
 function hentStudent() {
-    const studid = "s383075";
+
     const url = "/hentEnStudent?studid=" + studid;
     $.get(url, function (student) {
         $("#visStudid").text(student.studid);

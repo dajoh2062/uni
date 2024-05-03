@@ -1,5 +1,6 @@
 package oslomet.uni;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,9 @@ import java.util.List;
 public class uniController {
     @Autowired
     private uniRepository rep;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/fjernFag")
     public void fjernFag(String id,String studid) {
@@ -41,4 +45,16 @@ public class uniController {
     public List<Fag> andrefag(String studid) {
         return rep.hentAndrefag(studid);
 
-}}
+    }
+    @GetMapping("/loggInn")
+    public boolean loggInn(String studid, String passord){
+        if(rep.loggInn(studid,passord)){
+            session.setAttribute("innlogget",true);
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+}

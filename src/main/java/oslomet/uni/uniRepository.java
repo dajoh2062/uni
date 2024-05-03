@@ -49,6 +49,17 @@ public class uniRepository {
         List <Fag> fagene = db.query(sql,param,new BeanPropertyRowMapper(Fag.class));
         return fagene;
     }
+
+    public boolean loggInn(String studid, String passord){
+        String sql= "SELECT count(*) from Bruker WHERE studid=? AND passord=?";
+        int funnetBruker =db.queryForObject(sql, Integer.class, studid, passord);
+        if(funnetBruker>0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 

@@ -6,15 +6,60 @@ $(function () {
 
 function hentValgteFag(){
     const studid='s383075';
-    $.get('/hentValgtefag?studid='+studid)
-}
+    $.get('/hentValgtefag?studid='+studid,function (fag) {
+        let ut = '<table class="table table-striped">' +
+            '<tr>' +
+            '<td><b>Fagkode</b></td>' +
+            '<td><b>Navn</b></td>' +
+            '<td><b>Lærer</b></td>' +
+            '<td><b>Eksamensdato</b></td>' +
+            '</tr>';
 
+
+        for(let fagInfo of fag) {
+            ut += '<tr>' +
+                '<td>' + fagInfo.id + '</td>' +
+                '<td>' + fagInfo.navn + '</td>' +
+                '<td>' + fagInfo.ansvar + '</td>' +
+                '<td>' + fagInfo.eksamensdato + '</td>' +
+                '</tr>';
+        }
+
+        ut += '</table>';
+        $("#dinefag").html(ut);
+    })
+}
+function hentValgteFag(){
+    const studid='s383075';
+    $.get('/hentValgtefag?studid='+studid,function (fag) {
+        let ut = '<table class="table table-striped">' +
+            '<tr>' +
+            '<td><b>Fagkode</b></td>' +
+            '<td><b>Navn</b></td>' +
+            '<td><b>Lærer</b></td>' +
+            '<td><b>Eksamensdato</b></td>' +
+            '</tr>';
+
+
+        for(let fagInfo of fag) {
+            ut += '<tr>' +
+                '<td>' + fagInfo.id + '</td>' +
+                '<td>' + fagInfo.navn + '</td>' +
+                '<td>' + fagInfo.ansvar + '</td>' +
+                '<td>' + fagInfo.eksamensdato + '</td>' +
+                '</tr>';
+        }
+
+        ut += '</table>';
+        $("#dinefag").html(ut);
+    })
+}
 
 
 function hentStudent() {
     const studid = "s383075";
     const url = "/hentEnStudent?studid=" + studid;
-    $.get(url, function(student) {
+    $.get(url, function (student) {
         $("#visStudid").text(student.studid);
         $("#visNavn").text(student.navn);
         $("#visTelefon").text(student.telefon);

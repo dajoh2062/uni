@@ -31,6 +31,10 @@ public class uniController {
         return rep.hentEnStudent(studid);
 
     }
+    @GetMapping("/inloggetBruker")
+    public String inloggetbruker(){
+        return (String)session.getAttribute("user");
+    }
 
     @PostMapping("/endreStudent")
     public void endreStudent(Student student) {
@@ -50,6 +54,7 @@ public class uniController {
     public boolean loggInn(String studid, String passord){
         if(rep.loggInn(studid,passord)){
             session.setAttribute("innlogget",true);
+            session.setAttribute("user",studid);
             return true;
         }
         else {

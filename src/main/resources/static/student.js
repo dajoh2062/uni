@@ -1,9 +1,22 @@
 $(function () {
-    hentStudent();
-    hentValgteFag();
-    hentAndreFag();
+    hentbruker().then(function() {
+        hentStudent();
+        hentValgteFag();
+        hentAndreFag();
+    });
 });
-const studid='s383075';
+
+let studid;
+
+function hentbruker() {
+    return new Promise(function(resolve) {
+        $.get("/inloggetBruker", function(data) {
+            studid = data;
+            resolve();
+        })
+    });
+}
+
 function fjernFag(id,studid){
     let Fjernetfag= {id:id, studid:studid};
     $.get("/fjernFag", Fjernetfag, function (){
@@ -125,7 +138,7 @@ $("#rediger").click(function (){
             "<tr><td><input onchange='validerTelefon(this.value)' type='text' id='redigerTelefon'></td><td><span class=\"text-danger\" id='feilTelefon'></span></td></tr>" +
             "<tr><td><label for='redigerStudie'>Studie: </label></td></tr>" +
             "<tr><td><input onchange='validerStudienavn(this.value)' type='text' id='redigerStudie'></td><td><span class=\"text-danger\" id='feilStudienavn'></span></td></tr>";
-        const studid = "s383075";
+
         const url = "/hentEnStudent?studid=" + studid;
         $.get(url, function(student) {
             $("#visStudid").text(student.studid);

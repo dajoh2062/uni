@@ -71,7 +71,7 @@ public class uniRepository {
 
         String hash =krypterPassord(student.getPassord());
         String sql = "INSERT INTO Kunde (passord, studid) VALUES(?,?)";
-        db.update(sql,student.getStudid(),hash);
+        db.update(sql,hash,student.getStudid());
 
 
     }

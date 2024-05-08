@@ -62,4 +62,8 @@ public class uniController {
         }
 
     }
+    @PostMapping("/leggTilBruker")
+    public void leggTilBruker(Bruker student){
+        rep.leggtilBruker(student);
+    }
 }

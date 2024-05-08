@@ -52,8 +52,9 @@ public class uniRepository {
     }
 
     public boolean loggInn(String studid, String passord){
+        String kryptert= krypterPassord(passord);
         String sql= "SELECT count(*) from Bruker WHERE studid=? AND passord=?";
-        int funnetBruker =db.queryForObject(sql, Integer.class, studid, passord);
+        int funnetBruker =db.queryForObject(sql, Integer.class, studid, kryptert);
         if(funnetBruker>0){
             return true;
         }
@@ -61,8 +62,10 @@ public class uniRepository {
             return false;
         }
     }
-    public void leggtilBruker(String passord, String studid){
-        String sql = "INSERT INTO Bruker"
+    public void leggtilBruker(Bruker student){
+        String kryptert= krypterPassord(student.getPassord());
+        String sql = "INSERT INTO Bruker (passord, studid) VALUES (?,?)";
+        db.update(sql,kryptert,student.getStudid());
 
     }
     private String krypterPassord(String passord){

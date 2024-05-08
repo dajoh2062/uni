@@ -61,6 +61,10 @@ public class uniRepository {
             return false;
         }
     }
+    public void leggtilBruker(String passord, String studid){
+        String sql = "INSERT INTO Bruker"
+
+    }
     private String krypterPassord(String passord){
         BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(5);
         String hashedPassord = bCrypt.encode(passord);

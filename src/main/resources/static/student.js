@@ -3,8 +3,10 @@ $(function () {
         hentStudent();
         hentValgteFag();
         hentAndreFag();
+
     });
 });
+
 
 let studid;
 
@@ -191,3 +193,9 @@ function validerStudienavn(studienavn){
         $("#feilStudienavn").text("");
     }   return true
 }
+$("#loggut").click(function (){
+    const url = "/logout";
+    $.get( url, function() {
+        window.location.href = '/';
+    })
+})

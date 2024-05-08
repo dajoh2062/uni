@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registrer</title>
+
 </head>
 <body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Registrer student</h1>
+            <br>
+            <div class="form">
+                <label for="regstudid">Student id: </label>
+                <input type="text" class="form-control" id="regstudid">
+                <span id ="feilregstudid"></span><br>
+
+                <label for="regnavn">Navn: </label>
+                <input type="text" class="form-control" id="regnavn">
+                <span id ="feilregnavn"></span><br>
+
+                <label for="regtelefon">Telefon: </label>
+                <input type="text" class="form-control" id="regtelefon">
+                <span id ="feilregtelefon"></span><br>
+
+                <label for="regstudienavn">Studienavn: </label>
+                <input type="text" class="form-control" id="regstudienavn">
+                <span id ="feilregstudienavn"></span><br>
+
+                <label for="regpassord">Passord: </label>
+                <input type="text" class="form-control" id="regpassord">
+                <span id ="feilregpassord"></span><br>
+
+                <button id ="registrerstudent" class="btn btn-primary">Registrer</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="valider.js"></script>
+<script src="registrer.js"></script>
+
 
 </body>
 </html>

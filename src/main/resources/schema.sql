@@ -13,10 +13,12 @@ CREATE TABLE Fag (
 );
 
 CREATE TABLE Bruker(
-    passord VARCHAR(50) NOT NULL,
-    studid VARCHAR(10),
-    FOREIGN KEY (studid) REFERENCES Student(studid)
+                       passord VARCHAR(100) NOT NULL,
+                       studid VARCHAR(10),
+                       FOREIGN KEY (studid) REFERENCES Student(studid),
+                       UNIQUE (studid)
 );
+
 CREATE TABLE Admin(
     id VARCHAR(10) PRIMARY KEY UNIQUE,
     FOREIGN KEY (id) REFERENCES Student(studid)

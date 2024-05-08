@@ -1,5 +1,8 @@
 INSERT INTO Student (studid, navn, telefon, studienavn)
-VALUES ('s383075', 'Meg', '48474930', 'Computer Science');
+VALUES
+    ('s383075', 'Meg', '48474930', 'Computer Science'),
+    ('s384075', 'Meg', '48474930', 'Computer Science');
+
 
 INSERT INTO Fag (id, navn, ansvar, eksamensdato)
 VALUES

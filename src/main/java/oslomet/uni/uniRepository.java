@@ -54,27 +54,7 @@ public class uniRepository {
         List<Fag> fagene = db.query(sql, param, new BeanPropertyRowMapper(Fag.class));
         return fagene;
     }
-    private String krypterPassord(String passord){
-        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(14);
-        String hashedPassord = bCrypt.encode(passord);
-        return hashedPassord;
-    }
 
-    private boolean sjekkPassord(String passord, String hashedPassord){
-        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-        if(bCrypt.matches(hashedPassord,passord)){
-            return true;
-        }
-        return false;
-    }
-    public void lagreBruker(Bruker student) {
-
-        String hash =krypterPassord(student.getPassord());
-        String sql = "INSERT INTO Kunde (passord, studid) VALUES(?,?)";
-        db.update(sql,hash,student.getStudid());
-
-
-    }
 /*
     public boolean loggInn(String studid, String passord){
         String sql= "SELECT count(*) from Bruker WHERE studid=? AND passord=?";
@@ -95,5 +75,32 @@ public class uniRepository {
         return sjekkPassord(dbsStudent.getPassord(),student.getPassord());
 
     }
+    private String krypterPassord(String passord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(5);
+        String hashedPassord = bCrypt.encode(passord);
+        return hashedPassord;
+    }
+
+    private boolean sjekkPassord(String passord, String hashedPassord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+        if(bCrypt.matches(hashedPassord,passord)){
+            return true;
+        }
+        return false;
+    }
+    public void lagreBruker(Bruker student) {
+
+        String hash =krypterPassord(student.getPassord());
+        String sql = "INSERT INTO Bruker (passord, studid) VALUES(?,?)";
+        db.update(sql,hash,student.getStudid());
+
+
+    }
+    public void lagreStudent(Student student){
+        String sql="INSERT INTO Student (studid, navn, telefon, studienavn) VALUES(?,?,?,?)";
+        db.update(sql, student.getStudid(), student.getNavn(), student.getTelefon(),student.getStudienavn());
+    }
+
+
 
 }

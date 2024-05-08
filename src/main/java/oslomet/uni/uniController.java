@@ -52,7 +52,6 @@ public class uniController {
     }
 
     @GetMapping("/loggInn")
-
     public boolean loggInn(Bruker student) {
         if (rep.loggInn(student)) {
             session.setAttribute("innlogget", true);
@@ -64,8 +63,18 @@ public class uniController {
     }
 
     @PostMapping("/lagreBruker")
-    public void lagreBruker(@RequestBody Bruker student){
+    public void lagreBruker(Bruker student) {
         rep.lagreBruker(student);
+    }
+    @PostMapping("/lagrestudent")
+    public void lagreStudent(Student student) {
+        rep.lagreStudent(student);
+    }
+
+    @GetMapping("/logout")
+    public void loggut(){
+        session.removeAttribute("Innlogget");
+        session.removeAttribute("user");
     }
 }
 

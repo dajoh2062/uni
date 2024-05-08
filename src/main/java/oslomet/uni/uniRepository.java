@@ -3,6 +3,7 @@ package oslomet.uni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -60,6 +61,20 @@ public class uniRepository {
             return false;
         }
     }
+    private String krypterPassord(String passord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(5);
+        String hashedPassord = bCrypt.encode(passord);
+        return hashedPassord;
+    }
+
+    private boolean sjekkPassord(String passord, String hashPassord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+        if(bCrypt.matches(hashPassord,passord)){
+            return true;
+        }
+        return false;
+    }
+
 }
 
 

@@ -18,12 +18,13 @@ public class uniController {
     private HttpSession session;
 
     @GetMapping("/fjernFag")
-    public void fjernFag(String id,String studid) {
+    public void fjernFag(String id, String studid) {
         rep.fjernFag(id, studid);
     }
+
     @PostMapping("/leggtilFag")
-    public void leggtilFag(String id,String studid){
-        rep.leggtilFag(id,studid);
+    public void leggtilFag(String id, String studid) {
+        rep.leggtilFag(id, studid);
     }
 
     @GetMapping("/hentEnStudent")
@@ -31,15 +32,17 @@ public class uniController {
         return rep.hentEnStudent(studid);
 
     }
+
     @GetMapping("/inloggetBruker")
-    public String inloggetbruker(){
-        return (String)session.getAttribute("user");
+    public String inloggetbruker() {
+        return (String) session.getAttribute("user");
     }
 
     @PostMapping("/endreStudent")
     public void endreStudent(Student student) {
         rep.endreStudent(student);
     }
+
     @GetMapping("/hentValgtefag")
     public List<Fag> valgtefag(String studid) {
         return rep.hentValgtefag(studid);
@@ -50,20 +53,23 @@ public class uniController {
         return rep.hentAndrefag(studid);
 
     }
+
     @GetMapping("/loggInn")
-    public boolean loggInn(String studid, String passord){
-        if(rep.loggInn(studid,passord)){
-            session.setAttribute("innlogget",true);
-            session.setAttribute("user",studid);
+
+    public boolean loggInn(Bruker student) {
+        if (rep.loggInn(student)) {
+            session.setAttribute("innlogget", true);
+            session.setAttribute("user", student.getStudid());
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-
     }
-    @PostMapping("/leggTilBruker")
-    public void leggTilBruker(Bruker student){
-        rep.leggtilBruker(student);
+
+    @PostMapping("/lagreBruker")
+    public void lagreBruker(Bruker student){
+        rep.lagreBruker(student);
     }
 }
+
+

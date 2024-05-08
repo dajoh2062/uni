@@ -1,13 +1,12 @@
 
 $(function (){
-    const Bruker = {passord:"passord", studid: "s383075"}
-    $.post("/leggTilBruker", Bruker,function (){
-        console.log(Bruker)
-    })
+    const student={passord:"passord", studid:"s384075"}
+    $.post("/lagreBruker",student)
+
 })
 function loggInn(){
-    const url="/loggInn?studid="+$("#brukernavn").val()+"&&passord="+$("#passord").val();
-    $.get(url,function (ok){
+    const student={studid:$("#brukernavn").val(), passord:$("#passord").val()};
+    $.get(student,function (ok){
         if (ok){
 
             window.location.href="/student.html";

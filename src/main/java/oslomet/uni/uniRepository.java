@@ -13,75 +13,87 @@ public class uniRepository {
     @Autowired
     private JdbcTemplate db;
 
-    public void fjernFag(String id, String studid){
+    public void fjernFag(String id, String studid) {
         String sql = "DELETE FROM Fagtakere WHERE id=? and studid =?";
         db.update(sql, id, studid);
     }
-    public void leggtilFag(String id, String studid){
-        String sql ="INSERT INTO Fagtakere (studid, id) VALUES (?,?)";
-        db.update(sql,studid,id);
+
+    public void leggtilFag(String id, String studid) {
+        String sql = "INSERT INTO Fagtakere (studid, id) VALUES (?,?)";
+        db.update(sql, studid, id);
     }
 
 
-    public Student hentEnStudent(String studid){
+    public Student hentEnStudent(String studid) {
         Object[] param = new Object[1];
-        param[0]=studid;
+        param[0] = studid;
         String sql = "select * from Student where studid = ?";
-        Student student=db.queryForObject(sql, param, BeanPropertyRowMapper.newInstance(Student.class));
+        Student student = db.queryForObject(sql, param, BeanPropertyRowMapper.newInstance(Student.class));
         return student;
 
     }
-    public void endreStudent(Student student){
+
+    public void endreStudent(Student student) {
         String sql = "UPDATE Student SET navn=?, telefon=?, studienavn=? WHERE studid = ?";
-        db.update(sql, student.getNavn(),student.getTelefon(),student.getStudienavn(), student.getStudid());
+        db.update(sql, student.getNavn(), student.getTelefon(), student.getStudienavn(), student.getStudid());
 
     }
-    public List<Fag> hentValgtefag(String studid){
+
+    public List<Fag> hentValgtefag(String studid) {
         Object[] param = new Object[1];
-        param[0]=studid;
-        String sql="SELECT * FROM FAG where id in(SELECT id FROM Fagtakere WHERE studid = ?)";
-        List <Fag> fagene = db.query(sql,param,new BeanPropertyRowMapper(Fag.class));
-        return fagene;
-    }
-    public List<Fag> hentAndrefag(String studid){
-        Object[] param = new Object[1];
-        param[0]=studid;
-        String sql="SELECT * FROM FAG where id not in(SELECT id FROM Fagtakere WHERE studid = ?)";
-        List <Fag> fagene = db.query(sql,param,new BeanPropertyRowMapper(Fag.class));
+        param[0] = studid;
+        String sql = "SELECT * FROM FAG where id in(SELECT id FROM Fagtakere WHERE studid = ?)";
+        List<Fag> fagene = db.query(sql, param, new BeanPropertyRowMapper(Fag.class));
         return fagene;
     }
 
+    public List<Fag> hentAndrefag(String studid) {
+        Object[] param = new Object[1];
+        param[0] = studid;
+        String sql = "SELECT * FROM FAG where id not in(SELECT id FROM Fagtakere WHERE studid = ?)";
+        List<Fag> fagene = db.query(sql, param, new BeanPropertyRowMapper(Fag.class));
+        return fagene;
+    }
+    private String krypterPassord(String passord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(14);
+        String hashedPassord = bCrypt.encode(passord);
+        return hashedPassord;
+    }
+
+    private boolean sjekkPassord(String passord, String hashedPassord){
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+        if(bCrypt.matches(hashedPassord,passord)){
+            return true;
+        }
+        return false;
+    }
+    public void lagreBruker(Bruker student) {
+
+        String hash =krypterPassord(student.getPassord());
+        String sql = "INSERT INTO Kunde (passord, studid) VALUES(?,?)";
+        db.update(sql,student.getStudid(),hash);
+
+
+    }
+/*
     public boolean loggInn(String studid, String passord){
-        String kryptert= krypterPassord(passord);
         String sql= "SELECT count(*) from Bruker WHERE studid=? AND passord=?";
-        int funnetBruker =db.queryForObject(sql, Integer.class, studid, kryptert);
+        int funnetBruker =db.queryForObject(sql, Integer.class, studid,passord);
         if(funnetBruker>0){
             return true;
         }
         else {
             return false;
         }
-    }
-    public void leggtilBruker(Bruker student){
-        String kryptert= krypterPassord(student.getPassord());
-        String sql = "INSERT INTO Bruker (passord, studid) VALUES (?,?)";
-        db.update(sql,kryptert,student.getStudid());
+    }}
 
-    }
-    private String krypterPassord(String passord){
-        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(5);
-        String hashedPassord = bCrypt.encode(passord);
-        return hashedPassord;
-    }
+ */
+    public boolean loggInn(Bruker student){
+        String sql = "SELECT * FROM Bruker WHERE studid = ?";
+        Bruker dbsStudent = db.queryForObject(sql,
+                BeanPropertyRowMapper.newInstance(Bruker.class), student.getStudid());
+        return sjekkPassord(dbsStudent.getPassord(),student.getPassord());
 
-    private boolean sjekkPassord(String passord, String hashPassord){
-        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-        if(bCrypt.matches(hashPassord,passord)){
-            return true;
-        }
-        return false;
     }
 
 }
-
-
